@@ -12,47 +12,50 @@ class CartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.shopping_cart),
-          onPressed: () {
-            final productCubit = context.read<ProductCubit>();
+    return GestureDetector(
+      onTap: () {
+        final productCubit = context.read<ProductCubit>();
 
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder:
-                    (context) => BlocProvider.value(
-                      value: productCubit,
-                      child: const CartPage(),
-                    ),
-              ),
-            );
-          },
-        ),
-        if (cartProducts.isNotEmpty)
-          Positioned(
-            right: 8,
-            top: 8,
-            child: Container(
-              padding: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                color: AppColors.agenoOrange,
-                shape: BoxShape.circle,
-              ),
-              child: Text(
-                '${cartProducts.length}',
-                style: const TextStyle(
-                  color: AppColors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder:
+                (context) => BlocProvider.value(
+                  value: productCubit,
+                  child: const CartPage(),
+                ),
+          ),
+        );
+      },
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.shopping_cart, size: 30, color: AppColors.black),
+          ),
+          if (cartProducts.isNotEmpty)
+            Positioned(
+              right: 8,
+              top: 8,
+              child: Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: AppColors.agenoOrange,
+                  shape: BoxShape.circle,
+                ),
+                child: Text(
+                  '${cartProducts.length}',
+                  style: const TextStyle(
+                    color: AppColors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -15,6 +15,8 @@ class ProductsList extends StatelessWidget {
       mainAxisSpacing: 8,
       crossAxisSpacing: 8,
       itemCount: products.length,
+      cacheExtent: 1000,
+      addAutomaticKeepAlives: true,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       itemBuilder: (context, index) {
         return ProductCard(product: products[index]);

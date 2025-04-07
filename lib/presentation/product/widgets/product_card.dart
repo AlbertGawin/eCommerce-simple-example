@@ -27,6 +27,7 @@ class ProductCard extends StatelessWidget {
                 height: 100,
                 width: double.infinity,
                 fit: BoxFit.cover,
+                filterQuality: FilterQuality.low,
               ),
               Padding(
                 padding: const EdgeInsets.only(
