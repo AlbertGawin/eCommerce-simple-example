@@ -1,4 +1,4 @@
-import 'package:ageno_flutter_assesment_skills/presentation/product/cubits/product_cubit.dart';
+import 'package:ageno_flutter_assesment_skills/presentation/product/cubits/cart_cubit.dart';
 import 'package:ageno_flutter_assesment_skills/presentation/product/widgets/cart_bottom_info.dart';
 import 'package:ageno_flutter_assesment_skills/presentation/product/widgets/cart_products_list.dart';
 import 'package:ageno_flutter_assesment_skills/presentation/product/widgets/empty_cart_info.dart';
@@ -10,7 +10,7 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<ProductCubit>().state;
+    final state = context.watch<CartCubit>().state;
 
     return Scaffold(
       appBar: AppBar(),

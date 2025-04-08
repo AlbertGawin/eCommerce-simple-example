@@ -1,6 +1,6 @@
 import 'package:ageno_flutter_assesment_skills/core/theme/app_colors.dart';
 import 'package:ageno_flutter_assesment_skills/domain/product/entities/product.dart';
-import 'package:ageno_flutter_assesment_skills/presentation/product/cubits/product_cubit.dart';
+import 'package:ageno_flutter_assesment_skills/presentation/product/cubits/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,7 +47,7 @@ class CartProductCard extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.remove_circle),
             onPressed: () {
-              context.read<ProductCubit>().removeFromCart(product);
+              context.read<CartCubit>().removeFromCart(product);
             },
           ),
         ],

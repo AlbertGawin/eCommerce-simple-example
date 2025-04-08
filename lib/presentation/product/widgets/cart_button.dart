@@ -1,5 +1,6 @@
 import 'package:ageno_flutter_assesment_skills/core/theme/app_colors.dart';
 import 'package:ageno_flutter_assesment_skills/domain/product/entities/product.dart';
+import 'package:ageno_flutter_assesment_skills/presentation/product/cubits/cart_cubit.dart';
 import 'package:ageno_flutter_assesment_skills/presentation/product/cubits/product_cubit.dart';
 import 'package:ageno_flutter_assesment_skills/presentation/product/pages/cart.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +15,14 @@ class CartButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        final productCubit = context.read<ProductCubit>();
+        final cartCubit = context.read<CartCubit>();
 
         Navigator.push(
           context,
           MaterialPageRoute(
             builder:
                 (context) => BlocProvider.value(
-                  value: productCubit,
+                  value: cartCubit,
                   child: const CartPage(),
                 ),
           ),

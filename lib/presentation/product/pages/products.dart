@@ -1,4 +1,5 @@
 import 'package:ageno_flutter_assesment_skills/core/errors/response_status.dart';
+import 'package:ageno_flutter_assesment_skills/presentation/product/cubits/cart_cubit.dart';
 import 'package:ageno_flutter_assesment_skills/presentation/product/cubits/product_cubit.dart';
 import 'package:ageno_flutter_assesment_skills/presentation/product/widgets/cart_button.dart';
 import 'package:ageno_flutter_assesment_skills/presentation/product/widgets/products_list.dart';
@@ -11,12 +12,15 @@ class ProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create:
-          (_) =>
-              ProductCubit(getProductsUsecase: sl())
-                ..fetchProducts()
-                ..clearCart(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CartCubit>(create: (_) => CartCubit()),
+        BlocProvider<ProductCubit>(
+          create:
+              (_) => ProductCubit(getProductsUsecase: sl())..fetchProducts(),
+        ),
+      ],
+
       child: const ProductsView(),
     );
   }
@@ -27,14 +31,17 @@ class ProductsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<ProductCubit>().state;
+    final productState = context.watch<ProductCubit>().state;
+    final cartState = context.watch<CartCubit>().state;
 
     return Scaffold(
-      appBar: AppBar(actions: [CartButton(cartProducts: state.cartProducts)]),
+      appBar: AppBar(
+        actions: [CartButton(cartProducts: cartState.cartProducts)],
+      ),
       body:
-          state.status.isInProgress
+          productState.status.isInProgress
               ? Center(child: CircularProgressIndicator())
-              : ProductsList(products: state.products),
+              : ProductsList(products: productState.products),
     );
   }
 }

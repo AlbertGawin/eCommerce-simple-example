@@ -33,20 +33,4 @@ class ProductCubit extends Cubit<ProductState> {
       emit(state.copyWith(status: ResponseStatus.initial));
     }
   }
-
-  void addToCart(ProductEntity product) {
-    emit(state.copyWith(cartProducts: [...state.cartProducts, product]));
-  }
-
-  void removeFromCart(ProductEntity product) {
-    emit(
-      state.copyWith(
-        cartProducts: state.cartProducts.where((p) => p != product).toList(),
-      ),
-    );
-  }
-
-  void clearCart() {
-    emit(state.copyWith(cartProducts: []));
-  }
 }

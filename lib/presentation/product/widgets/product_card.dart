@@ -1,5 +1,6 @@
 import 'package:ageno_flutter_assesment_skills/core/theme/app_colors.dart';
 import 'package:ageno_flutter_assesment_skills/domain/product/entities/product.dart';
+import 'package:ageno_flutter_assesment_skills/presentation/product/cubits/cart_cubit.dart';
 import 'package:ageno_flutter_assesment_skills/presentation/product/cubits/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +12,7 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<ProductCubit>().state;
+    final cartState = context.watch<CartCubit>().state;
 
     return Stack(
       children: [
@@ -70,7 +71,7 @@ class ProductCard extends StatelessWidget {
             height: 40,
             decoration: BoxDecoration(
               color:
-                  state.cartProducts.contains(product)
+                  cartState.cartProducts.contains(product)
                       ? AppColors.agenoOrange
                       : AppColors.white,
               borderRadius: BorderRadius.circular(360),
@@ -78,19 +79,19 @@ class ProductCard extends StatelessWidget {
             ),
             child: IconButton(
               icon:
-                  state.cartProducts.contains(product)
+                  cartState.cartProducts.contains(product)
                       ? const Icon(Icons.check)
                       : const Icon(Icons.add),
               color:
-                  state.cartProducts.contains(product)
+                  cartState.cartProducts.contains(product)
                       ? AppColors.white
                       : AppColors.agenoOrange,
               iconSize: 20,
               onPressed: () {
-                if (state.cartProducts.contains(product)) {
-                  context.read<ProductCubit>().removeFromCart(product);
+                if (cartState.cartProducts.contains(product)) {
+                  context.read<CartCubit>().removeFromCart(product);
                 } else {
-                  context.read<ProductCubit>().addToCart(product);
+                  context.read<CartCubit>().addToCart(product);
                 }
               },
             ),
