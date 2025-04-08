@@ -1,29 +1,33 @@
 # Ageno-Flutter-Assessment-Skills - Albert Gawin
 
+
 # Działanie aplikacji
-- Główny ekran wyświetla listę przedmiotów, dodano sztuczne ładowanie w celu symulacji wczytywania produktów z internetu (2 sekundy).
-- Każdy z przedmiotów ma przycisk, który po kliknięciu dodajego go do koszyka
-- W prawym górnym rogu mamy koszyk, który wyświetla ilość przedmiotów
-- Po kliknięciu w koszyk przenosi nas na ekran koszyka, gdzie mamy listę przedmiotów w koszyku
-- Na dole ekranu koszyka widać zsumowaną cenę wszystkich przedmiotów
-- Każdy z przedmiotów w ekranie koszyka posiada opcję usuwanie, poprzez kliknięcie w ikonkę minusa
-
-# Aplikacja dzieli się na trzy główne warstwy:
-- `Data` to właśnie z tego miejsca pobierane są dane, dzięki temu oddzieleniu łatwo będzie zamienić istniejący kod na pobieranie grafik z internetu
-- `Domain` połączenie pomiędzy warstwą danych i prezentacji, trzyma wszystko w ryzach i upewnia się, że dane są spójne
-- `Presentation` warstwa UI, czyli wygląd końcowy użytkownika, to tutaj wszystkie dane prezentowane są w aplikacji
-
-Takie podejście pozwala w uporządkowany sposób zarządzać kodem, co w przyszłości zaoowocuje łatwiejszym dodaniem nowych funkcjonalności.
+- Główny ekran wyświetla listę przedmiotów. Dodano sztuczne ładowanie, które symuluje wczytywanie produktów z internetu (opóźnienie 2 sekundy).
+- Każdy przedmiot posiada przycisk, który po kliknięciu dodaje go do koszyka.
+- W prawym górnym rogu znajduje się ikona koszyka, która wyświetla liczbę przedmiotów w koszyku.
+- Po kliknięciu w koszyk przenosimy się na ekran koszyka, na którym widzimy listę przedmiotów.
+- Na dole ekranu koszyka znajduje się zsumowana cena wszystkich przedmiotów.
+- Każdy przedmiot w koszyku ma opcję usunięcia, którą aktywujemy klikając na ikonę minusa.
 
 
-# Podzieliłem aplikacje na dwa stany (bloc): 
-- `ProductState` odczytuje produkty z bazy danych.
-- `CartState` trzyma informacje o koszyku oraz znajdującym się w nich produktach.
+# Architektura aplikacji
+Aplikacja jest podzielona na trzy główne warstwy:
+- `Data` warstwa odpowiedzialna za pobieranie danych. Dzięki temu oddzieleniu, łatwo będzie wymienić istniejący kod na pobieranie grafik z internetu.
+- `Domain` pośredniczy pomiędzy warstwą danych a warstwą prezentacji, utrzymując spójność danych.
+- `Presentation` warstwa odpowiadająca za UI, czyli wygląd aplikacji, gdzie dane są prezentowane użytkownikowi.
 
-Dzięki takiemu podziałowi, zarządzanie osobnymi stanami jest łatwe oraz nie mieszamy koszyka ze wszystkimi produktami. Gdybyśmy trzymali to w jednym stanie, to przesyłalibyśmy całą listę produktów (czasami liczone w setkach jak nie tysiącach) do stanu koszyka, czego byśmy nie chcieli.
+Takie podejście pozwala w sposób uporządkowany zarządzać kodem, co ułatwi dodawanie nowych funkcji w przyszłości.
+
+
+# Stany aplikacji (Bloc)
+Podzieliłem aplikację na dwa stany (Bloc):
+- `ProductState` odpowiada za odczyt produktów z bazy danych.
+- `CartState` przechowuje informacje o koszyku oraz znajdujących się w nim produktach.
+
+Dzięki temu podziałowi zarządzanie stanami jest łatwiejsze, a oddzielanie logiki koszyka od produktów pozwala uniknąć problemu przesyłania całej listy produktów (czasami liczonej w setkach lub tysiącach) do stanu koszyka. Każdy stan posiada również enuma o informacji połączenia tzn. mamy przygotowane informacje oraz łatwe wdrożenie pzabezpieczenia przed potencjalnymi błędami lub ładowaniem danych `ResponseStatus`.
 
 
 # Informacje techniczne:
-- Wygląd robiony na szybko, żeby zmieścić się w tych trzech godzinach. Główny czas spędzony na funkcjonalnościach opisanych w punktach wyżej.
-- Dodałem sztuczne ładowanie, taka symulacja ładowania z internetu
-- Grafiki zmienione na mniejszą rozdzielczość (troszeczkę za małą), żeby nie było efektu ładowania podczas zmiany następnego/poprzedniego ekranu. Normalnie użyłbym biblioteki `CachedNetworkImage` gdyby to były zdjęcia z internetu (2 sekundy).
+- Wygląd aplikacji został stworzony w krótkim czasie, aby zmieścić się w ramach 3 godzin. Większość czasu poświęciłem na implementację funkcjonalności opisanych powyżej.
+- Dodano sztuczne ładowanie, symulujące opóźnione ładowanie z internetu (z opóźnieniem 2 sekundy).
+- Grafiki zostały zmienione na mniejszą rozdzielczość (nieco za małą), aby uniknąć efektu ładowania przy przechodzeniu między ekranami. Gdyby aplikacja korzystała z obrazów pobieranych z internetu, użyłbym biblioteki CachedNetworkImage.
