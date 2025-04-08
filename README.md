@@ -24,7 +24,7 @@ Podzieliłem aplikację na dwa stany (Bloc):
 - `ProductState` odpowiada za odczyt produktów z bazy danych.
 - `CartState` przechowuje informacje o koszyku oraz znajdujących się w nim produktach.
 
-Dzięki temu podziałowi zarządzanie stanami jest łatwiejsze, a oddzielanie logiki koszyka od produktów pozwala uniknąć problemu przesyłania całej listy produktów (czasami liczonej w setkach lub tysiącach) do stanu koszyka.
+Dzięki temu podziałowi zarządzanie stanami jest łatwiejsze, a oddzielanie logiki koszyka od produktów pozwala uniknąć problemu przesyłania całej listy produktów (czasami liczonej w setkach lub tysiącach) do stanu koszyka. Każdy stan posiada również enuma o informacji połączenia tzn. mamy przygotowane informacje oraz łatwe wdrożenie pzabezpieczenia przed potencjalnymi błędami lub ładowaniem danych `ResponseStatus`.
 
 
 # Informacje techniczne:
