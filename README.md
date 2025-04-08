@@ -29,5 +29,5 @@ Dzięki temu podziałowi zarządzanie stanami jest łatwiejsze, a oddzielanie lo
 
 # Informacje techniczne:
 - Wygląd aplikacji został stworzony w krótkim czasie, aby zmieścić się w ramach 3 godzin. Większość czasu poświęciłem na implementację funkcjonalności opisanych powyżej.
-- Dodano sztuczne ładowanie, symulujące opóźnione ładowanie z internetu.
-- Grafiki zostały zmienione na mniejszą rozdzielczość (nieco za małą), aby uniknąć efektu ładowania przy przechodzeniu między ekranami. Gdyby aplikacja korzystała z obrazów pobieranych z internetu, użyłbym biblioteki CachedNetworkImage (z opóźnieniem 2 sekundy).
+- Dodano sztuczne ładowanie, symulujące opóźnione ładowanie z internetu (z opóźnieniem 2 sekundy).
+- Grafiki zostały zmienione na mniejszą rozdzielczość (nieco za małą), aby uniknąć efektu ładowania przy przechodzeniu między ekranami. Gdyby aplikacja korzystała z obrazów pobieranych z internetu, użyłbym biblioteki CachedNetworkImage.
