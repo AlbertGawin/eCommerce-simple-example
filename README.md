@@ -1,33 +1,30 @@
-# Ageno-Flutter-Assessment-Skills - Albert Gawin
+# eCommerce-simple-example
 
+## App Functionality
+- The main screen displays a list of products. Artificial loading has been added to simulate fetching items from the internet (2-second delay).  
+- Each item has a button that adds it to the cart when clicked.  
+- In the top right corner is a cart icon showing the number of items currently in the cart.  
+- Clicking the cart icon navigates to the cart screen, displaying a list of selected items.  
+- At the bottom of the cart screen, the total price of all items is shown.  
+- Each item in the cart can be removed by clicking the minus icon.
 
-# Działanie aplikacji
-- Główny ekran wyświetla listę przedmiotów. Dodano sztuczne ładowanie, które symuluje wczytywanie produktów z internetu (opóźnienie 2 sekundy).
-- Każdy przedmiot posiada przycisk, który po kliknięciu dodaje go do koszyka.
-- W prawym górnym rogu znajduje się ikona koszyka, która wyświetla liczbę przedmiotów w koszyku.
-- Po kliknięciu w koszyk przenosimy się na ekran koszyka, na którym widzimy listę przedmiotów.
-- Na dole ekranu koszyka znajduje się zsumowana cena wszystkich przedmiotów.
-- Każdy przedmiot w koszyku ma opcję usunięcia, którą aktywujemy klikając na ikonę minusa.
+## App Architecture
+The application is divided into three main layers:
+- `Data` – responsible for retrieving data. This separation makes it easy to later replace the current logic with actual online image fetching.  
+- `Domain` – acts as an intermediary between the data and presentation layers, maintaining data consistency.  
+- `Presentation` – responsible for the UI, presenting the data to the user.
 
+This structured approach ensures maintainability and makes it easier to add new features in the future.
 
-# Architektura aplikacji
-Aplikacja jest podzielona na trzy główne warstwy:
-- `Data` warstwa odpowiedzialna za pobieranie danych. Dzięki temu oddzieleniu, łatwo będzie wymienić istniejący kod na pobieranie grafik z internetu.
-- `Domain` pośredniczy pomiędzy warstwą danych a warstwą prezentacji, utrzymując spójność danych.
-- `Presentation` warstwa odpowiadająca za UI, czyli wygląd aplikacji, gdzie dane są prezentowane użytkownikowi.
+## Application States (Bloc)
+The app uses two main blocs for state management:
+- `ProductState` – responsible for reading product data from the database.  
+- `CartState` – stores cart information and the list of items currently in the cart.  
 
-Takie podejście pozwala w sposób uporządkowany zarządzać kodem, co ułatwi dodawanie nowych funkcji w przyszłości.
+This separation makes state management more efficient and avoids sending large product lists (sometimes hundreds or thousands of items) to the cart state.  
+Each state also includes an enum indicating connection status (`ResponseStatus`), making it easy to handle errors and load states gracefully.
 
-
-# Stany aplikacji (Bloc)
-Podzieliłem aplikację na dwa stany (Bloc):
-- `ProductState` odpowiada za odczyt produktów z bazy danych.
-- `CartState` przechowuje informacje o koszyku oraz znajdujących się w nim produktach.
-
-Dzięki temu podziałowi zarządzanie stanami jest łatwiejsze, a oddzielanie logiki koszyka od produktów pozwala uniknąć problemu przesyłania całej listy produktów (czasami liczonej w setkach lub tysiącach) do stanu koszyka. Każdy stan posiada również enuma o informacji połączenia tzn. mamy przygotowane informacje oraz łatwe wdrożenie pzabezpieczenia przed potencjalnymi błędami lub ładowaniem danych `ResponseStatus`.
-
-
-# Informacje techniczne:
-- Wygląd aplikacji został stworzony w krótkim czasie, aby zmieścić się w ramach 3 godzin. Większość czasu poświęciłem na implementację funkcjonalności opisanych powyżej.
-- Dodano sztuczne ładowanie, symulujące opóźnione ładowanie z internetu (z opóźnieniem 2 sekundy).
-- Grafiki zostały zmienione na mniejszą rozdzielczość (nieco za małą), aby uniknąć efektu ładowania przy przechodzeniu między ekranami. Gdyby aplikacja korzystała z obrazów pobieranych z internetu, użyłbym biblioteki CachedNetworkImage.
+## Technical Notes
+- The UI was created quickly to stay within a 3-hour time limit. Most of the time was dedicated to implementing the key features described above.  
+- Artificial loading was added to simulate network delays (2 seconds).  
+- Images were downscaled (perhaps slightly too much) to avoid loading artifacts when navigating between screens.  
